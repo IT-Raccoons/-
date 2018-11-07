@@ -18,6 +18,31 @@ int main() {
 	cout << weight[0] << endl;
 	cout << weight[1] << endl;
 	cout << weight[2] << endl;
+	
+	#include <iostream>
+#include <string.h>
+
+using namespace std;
+int main()
+{
+	string a,b,max;
+	cin>>a>>b;
+	for (int i=0;i<a.size();i++)
+	{
+      if ((int)a.at(i)>(int)b.at(i))
+       {
+      max=a;
+      break;
+   	}
+      else if ((int)a.at(i)<(int)b.at(i))
+      {
+      	max=b;
+      	break;
+      }
+	}
+	cout<<max;""
+}
+A 
 	/*
 	for (weight[i]=""; weight<money[i].size(); i++) {
 		weight[i] += 1;
