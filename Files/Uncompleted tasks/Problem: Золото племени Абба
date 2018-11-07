@@ -2,28 +2,51 @@
 #include <string>
 using namespace std;
 int main() {
-	
-	
 	/* Переменные */
-	/* Счетчик */
-	long long i, weight[3];
+	/* Значения */
+	long long weight[3];
 	/* Строки */ 
 	string money[3];
-	
+	/* Начало программы */ 
 	cin >> money[0] >> money[1] >> money[2];
 	
-	for (i=0; i<=2; i++) {
+	for (int i = 0; i <= 2; i++) {
 		weight[i] = money[i].size();
 	}
-	cout << weight[0] << endl;
-	cout << weight[1] << endl;
-	cout << weight[2] << endl;
-
-	/*
-	for (weight[i]=""; weight<money[i].size(); i++) {
-		weight[i] += 1;
+	/* Сортировка */
+	if (weight[0] > weight[1]) {
+		swap(weight[0], weight[1]);
+		swap(money[0], money[1]);
 	}
-	cout << weight[0] << endl;
-	*/
+	if (weight[1] > weight[2]) {
+		swap(weight[1], weight[2]);
+		swap(money[1], money[2]);
+	}
+	if (weight[0] > weight[1]) {
+		swap(weight[0], weight[1]);
+		swap(money[0], money[1]);
+	}
+	/* Проверка на равность */
+	if (weight[1] < weight[2]) {
+		cout << money[2];
+	}
+	else {
+		if (money[1] == money[2]) {
+			cout << money[2];
+		}
+		else {
+			/* Посимвольное сравнение */
+			for (int i = 0; i < weight[2]; i++) {
+				if ((int)money[1].at(i) < (int)money[2].at(i)) {
+					cout << money[2];
+					break;
+				}
+				else if ((int)money[1].at(i) > (int)money[2].at(i)) {
+					cout << money[1];
+					break;
+				}
+			}
+		}
+	}
 	return 0;
 }
