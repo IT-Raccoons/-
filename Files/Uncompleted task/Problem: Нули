@@ -2,30 +2,25 @@
 #include <string>
 using namespace std;
 int main() {
-	/* Переменные */
 	string number;
-	int weight, count = 0, iscycle = 0, max = 0, zero = 0, one = 1;
-	/* Начало программы */
+	int weight, count = 0, iscycle = 0, max = 0;
+	
 	cin >> number;
 	weight = number.size();
 	for (int i = 0; i < weight; i++) {
-		if ((int)number.at(i) > zero) {
+		if ((int)number.at(i) - 48 == 1) {
 			count = 0;
 			iscycle = 0;
-			cout << "Were 1";
 		}
-		if ((int)number.at(i) == 0 && iscycle > zero) {
+		if ((int)number.at(i) - 48 == 0 && iscycle == 1) {
 			count += 1;
-			cout << "Were 2";
 		}
-		if ((int)number.at(i) == 0 && iscycle == zero) {
+		if ((int)number.at(i) - 48 == 0 && iscycle == 0) {
 			iscycle = 1;
 			count =+ 1;
-			cout << "Were 3";
 		}
 		if (max < count) {
 			max = count;
-			cout << "Were 4";
 		}
 	}
 	cout << max << endl;
