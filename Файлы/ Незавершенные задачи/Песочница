@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+	int n, m;
+	cin >> n >> m;
+	 string k[n];
+	for (int i = 1; i <= 3*n; i++) {
+		getline(cin, k[i]);
+	}
+	string p[m];
+	for (int i = 1; i <= m; i++) {
+		cin >> p[i];
+	}
+	for (int i = 1; i <= m; i++) {
+		for (int j = 1; j <= 3*n; j++) {
+			if (k[j] == p[i]) {
+				cout << k[j] << " (" << k[j+2]<< ")" << endl;
+			}
+		}
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+int main() {
+	int s, p, f = 1;
+	cin >> s >> p;
+	string FIO[s], MaxMarks[s];
+	int Marks[s*p];
+	double d[s];
+	for (int i = 1; i <= s; i++) {
+		cin >> FIO[i];
+		for (int j = 1; j <= p; p++) {
+			cin >> Marks[j];
+			d[i] = d[j] + Marks[j];
+		}
+		d[i] = d[i] / p;
+	}
+	for (int i = 1; i <= s; i++) {
+		for (int j = 1; j <= s; j++) {
+			if (d[i] > d[j] && f <= 3) {
+				MaxMarks[f] = i;
+				f++;
+			}
+			else if (f == 3) {
+				i = s + 1;
+			}
+		}
+	}
+	for (int i = 1; i <= s; i++) {
+		for (int j = 1; j <= s; j++) {
+			if (d[i] = d[j] && i != j && f > 3) {
+				MaxMarks[f] = i;
+				f++;
+			}
+		}
+	}
+	for (int i = 1; i <= f; i++) {
+		cout << FIO[MaxMarks[i]] << " (";
+		for (int j = 1; j <= p; j++) {
+			cout << Marks[j*i] << " ";
+		}
+		cout << ")" << endl;
+	}
+	return 0;
+}
