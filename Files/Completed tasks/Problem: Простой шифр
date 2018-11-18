@@ -1,0 +1,19 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+    string input, output;
+    int weight;
+    cin >> input;
+    weight = input.size();
+    for (int i; i < weight; i++) {
+        if (input[i] + 1 < '{') {
+            output += input[i] + 1;
+        }
+        else {
+            output += 'a';
+        }
+    }
+    cout << output << endl;
+    return 0;
+}
