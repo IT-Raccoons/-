@@ -1,0 +1,97 @@
+// Работает 0,218 пямять: 2620 Кб
+#include <iostream>
+using namespace std;
+int main()
+{
+	ios::sync_with_stdio(false);
+   
+    int n, m;
+    cin >> n >> m;
+    int M[n][m], Min[n], Max[m];
+    long int  count=0;
+    for(int i=0; i<n; i++)
+    {
+	int min = 1001;
+        for(int j=0; j < m; j++)
+        {
+            cin >> M[i][j];
+ 			if( min>M[i][j])
+ 			{
+              min=M[i][j];
+ 			 }
+            }  
+      Min[i]=min;
+    }
+    for(int j=0; j<m; j++)
+    { 
+      int max = -1001;
+        for(int i=0; i<n; i++)
+        {
+            if(max < M[i][j])
+                        {
+                          max=M[i][j];       
+                        }
+          
+        }  
+      Max[j]=max; 
+    }
+ for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<m; j++)
+        {
+          if(Min[i]==Max[j] && Min[i]==M[i][j])
+			{	
+				count++;
+			}			  
+    	}
+	}
+cout<<count;
+return 0;
+}
+//*
+не работает 1,436 память:	2604 Кб
+#include <iostream>
+using namespace std;
+int main()
+{
+  ios_base::sync_with_stdio(false);
+    long long n, m, count=0;
+    cin >> n >> m;
+    int M[n][m];
+    for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<m; j++)
+        {
+            ios_base::sync_with_stdio(false);
+            cin >> M[i][j];
+            }   
+    }
+    for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<m; j++)
+        {
+        int min = 1001, max = -1001;
+              for(int b = 0; b<m; b++)
+                {
+                    if(min>M[i][b])
+                        {
+                            min=M[i][b];
+                        }
+                }
+            for(int b=0; b<n; b++)
+                {
+                    if(max < M[b][j])
+                        {
+                            max=M[b][j];
+                        }
+                }
+            if(min == max)
+                {
+                    count++;
+                }
+        }   
+    }
+cout<<count;
+return 0;
+}
+*\\
