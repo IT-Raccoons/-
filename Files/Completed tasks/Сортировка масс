@@ -82,3 +82,51 @@ int main()
     }
 return 0;
 }
+
+
+/*
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    int  m1[n];
+    string m2[n];
+    double m3[n];
+    for (int i=0;i<n;i++){
+        cin>>m1[i] >> m2[i];
+        m3[i]=m1[i];
+        if ((m2[i][0]=='g' ||  m2[i][1]=='g')) 
+            m3[i]*=1000;
+        else if ((m2[i][0]=='p' ||  m2[i][1]=='p')) 
+            m3[i]*=16380000;
+        else if ((m2[i][0]=='t' ||  m2[i][1]=='t')) 
+            m3[i]*=1000000000;
+             
+        if (m2[i][0]=='m')
+            m3[i]*=pow(10,-3);
+        else if (m2[i][0]=='k') 
+            m3[i]*=pow(10,3);
+        else if (m2[i][0]=='M') 
+            m3[i]*=pow(10,6);
+        else if (m2[i][0]=='G') 
+            m3[i]*=pow(10,9);
+    }
+    for(int i = 1; i < n; i++){
+        for(int ii = 0; ii < n-i; ii++){
+            if(m3[ii] > m3[ii+1]){
+                    swap(m3[ii],m3[ii+1]);
+                    swap(m1[ii],m1[ii+1]);
+                    swap(m2[ii],m2[ii+1]);
+            } 
+        }
+    }
+     
+    for (int i=0;i<n;i++){
+        cout<< m1[i] << " " << m2[i] << endl;
+    }
+    return 0;
+}
+*/
