@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    int n;
+    cin>>n;
+    int dd,mm,h,m,time[n],sum_t=0;
+    char c;
+    string str[n];
+    for (int i=0;i<n;i++){
+        cin>>dd>>c>>mm>>c>>h>>c>>m;
+        time[i]=0;
+        for (int j=1;j<=mm-1;j++){
+            if (j==1 || j==3 || j==5 || j==7 || j==8 || j==10 || j==12) 
+                time[i]+=31;
+            else if(j==2) 
+                time[i]+=28;
+            else 
+                time[i]+=30;
+        }
+        time[i]=((time[i]+dd)*8+h)*60+m;
+    }
+    
+    for (int i=0;i<n;i++){
+        for (int j=0;j<n-1;j++){
+            if (time[j]>time[j+1]){
+                swap(time[j],time[j+1]);
+                swap(str[j],str[j+1]);
+            }
+        }
+    }
+
+    for (int i=0;i<n;i+=2){
+        sum_t+=time[i+1]-time[i]+1;
+    }
+    cout<< sum_t/60 << ":";
+    if (sum_t%60/10==0) cout<< "0" << sum_t%60;
+    else cout<< sum_t%60;
+    return 0;
+}	
