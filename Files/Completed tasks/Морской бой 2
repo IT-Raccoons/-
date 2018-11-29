@@ -3,25 +3,69 @@ using namespace std;
 int main()
 {
 	ios::sync_with_stdio(false);
-	int x,y,c=0;
-	cin>>x>>y;
-	int a[x][y];
-	char v;
-    for (int i=0; i<x;i++){
-		for (int j=0;j<y;j++){
-			cin>> v;
-			if (v=='.')
-		    	a[i][j]=0;
+	int n, m, count=0;
+	cin>>n>>m;
+	int mass[n][m];
+	char p;
+    for (int i=0; i<n; i++){
+		for (int j=0;  j<m; j++){
+			cin >> p;
+			if (p=='.')
+		    	{
+					mass[i][j]=0;
+				}
 			else
-			    a[i][j]=1; 
+			{
+				 mass[i][j]=1;
+			}	    
 		}
 	}
-	for (int i=1; i<x;i++){
-		for (int j=0;j<y;j++){
-		    if ((a[i][j]==0) && (a[i-1][j]==0) && (a[i+1][j]==0) && (a[i][j-1]==0) && (a[i][j+1]==0))
-			    c++;
+	for (int i=0; i<n; i++){
+		for (int j=0; j<m; j++){
+			if( mass[i][j]==0)
+			{
+				if(i==0|| i==n-1|| j==0||j==m-1)
+				{
+					if(i==0 && j==0  && (mass[i+1][j]==0) && (mass[i][j+1]==0) )
+					{
+						count++;
+					}
+				 else	if(i==n-1 && j==m-1  && (mass[i-1][j]==0) && (mass[i][j-1]==0))
+					{
+						count++;
+					}
+				else	if(j==0 && i==n-1  && (mass[i-1][j]==0) &&  (mass[i][j+1]==0))
+					{
+						count++;
+					}
+				else	if(i==0 && j==n-1 && (mass[i+1][j]==0) && (mass[i][j-1]==0) )
+					{
+						count++;
+					}
+				else	if(i==0 &&(mass[i+1][j]==0) && (mass[i][j-1]==0) && (mass[i][j+1]==0))
+					{
+						count++;
+					}
+				else	if(i==n-1 && (mass[i-1][j]==0) &&  (mass[i][j-1]==0) && (mass[i][j+1]==0))
+					{
+						count++;
+					}
+				else	if(j==0 && (mass[i-1][j]==0) && (mass[i+1][j]==0) && (mass[i][j+1]==0))
+				{
+					count++;
+				}
+				else	if(j==m-1 &&(mass[i-1][j]==0) && (mass[i+1][j]==0) && (mass[i][j-1]==0))
+				{
+					count++;
+				}
+		    	}
+				else if ( (mass[i-1][j]==0) && (mass[i+1][j]==0) && (mass[i][j-1]==0) && (mass[i][j+1]==0))
+			    	{
+						count++;
+					}
+			}
 		}
 	}
-	cout<<c;
+	cout<<count;
 	return 0;
 }
