@@ -1,0 +1,78 @@
+Через if: 
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    string light1, light2, light3;
+    cin>>light1>>light2>> light3;
+    if(light1=="black" && light2=="black" && light3=="green")
+    {
+        cout<<"black"<<" "<<"black"<<" "<<"GREEN";
+    }
+    else if(light1=="black" && light2=="black" && light3=="GREEN")
+    {
+        cout<<"black"<<" "<<"yellow"<<" "<<"black";
+    }
+    else if(light1=="black" && light2=="yellow" && light3=="black")
+    {
+        cout<<"red"<<" "<<"black"<<" "<<"black";
+    }
+    else if(light1=="red" && light2=="black" && light3=="black")
+    {
+        cout<<"red"<<" "<<"yellow"<<" "<<"black";
+    }
+    else if(light1=="red" && light2=="yellow" && light3=="black")
+    {
+        cout<<"black"<<" "<<"black"<<" "<<"green";
+    }
+    else if(light1=="black" && light2=="YELLOW" && light3=="black")
+    {
+        cout<<"black"<<" "<<"YELLOW"<<" "<<"black";
+    }
+    else
+    {
+        cout<<"error";
+    }
+}
+
+Через hash строки:
+#include <iostream>
+#include <string>
+using namespace std;
+int takehash(string input) {
+    int weight = 0, output = 0;
+    weight = input.size();
+    for (int i = 0; i < weight; i++) {
+        output += input[i];
+    }
+    output += input[0];
+    output += input[14];
+    return output;
+}
+ 
+int main() {
+    int hash;
+    string input, colors;
+    for (int i; i < 3; i++) {
+        cin >> input;
+        colors += input;
+    }
+    hash = takehash(colors);
+    switch (hash) {
+        case (1755): cout << "black" << endl << "black" << endl << "GREEN";
+            break;
+        case (1563): cout << "black" << endl << "yellow" << endl << "black";
+            break; 
+        case (1883): cout << "red" << endl << "black" << endl << "black";
+            break;
+        case (1447): cout << "red" << endl << "yellow" << endl << "black";
+            break;
+        case (1606): cout << "black" << endl << "black" << endl << "green";
+            break;
+        case (1691): cout << "black" << endl << "YELLOW" << endl << "black";
+            break;
+            default: cout << "error";
+    }
+    return 0;
+}
