@@ -1,1 +1,28 @@
-1
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+int main(){
+ 	string str,hod;
+ 	cin>>str;
+ 	while (str!=""){
+ 		int b=str.size()-1;
+	    if (str.size()>1 && (int)str.at(b)%2==1 && (int)str.at(b-1)%2==1){
+ 			hod="Vito";
+ 			break;
+	 	}
+	 	else{
+		    str.replace(0,1,"");
+		    if (str.size()==0){
+		    	hod="Romario";
+				break;
+			}
+ 			hod="Vito";
+		}	
+		if (str.size()%2!=0)
+	    hod="Vito";
+	    str="";
+    }
+    cout<<hod;
+ 	return 0;
+}
