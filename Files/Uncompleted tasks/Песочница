@@ -74,3 +74,27 @@ int main() {
 	}
 	return 0;
 }
+
+
+#include <iostream>
+using namespace std;
+int createarray(long long **m) {
+	int q;
+	cin >> q;
+	*m = (long long*)calloc(q, sizeof(long long));
+	for (int i = 0; i < q; i++) {
+		cin >> (*m)[i];
+	}
+	return q;
+}
+int main() {
+	long long *m;
+	int n;
+	n = createarray(&m);
+	cout << n << endl;
+	for (int i = 0; i < n; i++) {
+		cout << m[i] << " ";
+	}
+	free(m);
+	return 0;
+}
