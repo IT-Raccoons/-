@@ -1,1 +1,12 @@
-
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main() {
+    int a,b,k;
+    cin>>a>>b;
+    k=abs(a-b)*2;
+    if (k<a || k<b)
+    	cout<<"No";
+    else cout<<k;
+    return 0;
+}
