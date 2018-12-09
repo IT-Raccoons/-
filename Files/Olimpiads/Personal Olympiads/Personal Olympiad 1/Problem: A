@@ -3,5 +3,4 @@ main() {
     int a, b, c; 
     std::cin >> a >> b >> c;
     std::cout << (b+c)*a;
-    return 0;
 }
