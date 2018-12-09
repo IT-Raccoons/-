@@ -1,1 +1,68 @@
-
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main() {
+	double x1, y1, r1, x2, y2, r2, x0, y0, l, s;
+	cin >> x1 >> y1 >> r1 >> x2 >> y2 >> r2;
+	// Вычисляем x0
+	if (x1 < 0 || x2 < 0) {
+		if (x1 < 0 && x2 < 0) {
+			x0 = ((((r1 + r2) / 2) * -1) + (min(x1, x2) / 2));
+		}
+		else if (x1 < 0 && x2 > 0) {
+			x0 = abs(x1 - x2) / 2 + x1;
+		}
+		else if (x1 > 0 && x2 < 0) {
+			x0 = abs(x1 - x2) / 2 + x2;
+		}
+	}
+	else {
+		x0 = abs(x1 - x2) / 2;
+	}
+	// Вычисляем y0
+	if (y1 < 0 || y2 < 0) {
+		if (y1 < 0 && y2 < 0) {
+			y0 = ((((r1 + r2) / 2) * -1) + (min(y1, y2) / 2));
+		}
+		else if (y1 < 0 && y2 > 0) {
+			y0 = abs(y1 - y2) / 2 + y1;
+		}
+		else if (y1 > 0 && y2 < 0) {
+			y0 = abs(y1 - y2) / 2 + y2;
+		}
+	}
+	else {
+		y0 = abs(y1 - y2) / 2;
+		
+	}
+	
+	/*Вычисляем l и s
+	if (x0 > 0 && y0 > 0) {
+		l = sqrt(pow(x0*2, 2) + pow(y0*2, 2));
+		
+	}
+	else if () {
+	}*/
+	
+	if (int(abs(x1 - x2)) % 2 != 0) {
+		x0 -= 0.5;
+	}
+	if (int(abs(y1 - y2)) % 2 != 0) {
+		y0 -= 0.5;
+	}
+	
+	// Вычисляем l
+	l = sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2));
+	if (x1 != 0 || x2 != 0 && y1 != 0 || y2 != 0) {
+		s = (r1 + r2 + l);
+	}
+	else {
+		s = (r1 + r2 + l) / 2;
+	}
+	printf("%.4lf", s);
+	printf(" ");
+	printf("%.4lf", x0);
+	printf(" ");
+	printf("%.4lf", y0);
+	return 0;
+}
