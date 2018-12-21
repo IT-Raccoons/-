@@ -1,0 +1,32 @@
+void HeapSort(int a[],int n){
+	int i,j,k;
+	for(i=n/2-1;i>=0;i--){
+		j=i;
+		while(j<n/2){ 
+			k=2*j+1;
+			if(k+1<n&&a[k]<a[k+1])
+				k++;
+			if(a[k]>a[j]){
+				swap(a[k],a[j]);
+				j=k;
+			}
+			else 
+				break; 
+		} 
+	}
+	for(i=n-1;i>0;i--){
+		j=0;
+		swap(a[0],a[i]);
+		while(j<i/2){ 
+			k=2*j+1;
+			if(k+1<i&&a[k]<a[k+1])
+				k++;
+			if(a[k]>a[j]){	
+				swap(a[k],a[j]);
+				j=k;
+			}
+			else 
+				break; 
+		} 
+	} 
+}
