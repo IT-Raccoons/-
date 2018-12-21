@@ -2,21 +2,8 @@
 #include <iostream>
 using namespace std;
 
-void movelines(double **matrix, int size, int i, unsigned int *c_o_m) {
-	for (int q = 0; q < size; q++) {
-		if (matrix[i][i] != 0 && matrix[q][i] < matrix[i][i] && matrix[q][i] != 0) {
-			for (int w = 0; w < size; w++) {
-				swap(matrix[q][w], matrix[i][w]);
-				(*c_o_m)++;
-			}
-		}
-		else if (matrix[i][i] == 0 && matrix[q][i] > matrix[i][i] && matrix[q][i] != 0) {
-			for (int w = 0; w < size; w++) {
-				swap(matrix[q][w], matrix[i][w]);
-				(*c_o_m)++;
-			}
-		}
-	}
+void movelines(double **matrix, int i, int size, unsigned int *c_o_m) {
+	for ()
 }
 
 int main() {
@@ -41,13 +28,6 @@ int main() {
 		movelines(matrix, size, i, &count_of_movements);
 	}
 
-
-
-
-
-
-
-	cout << count_of_movements / 2 << endl;
 	// Вывод матрицы
 	for (int q = 0; q < size; q++) {
 		for (int w = 0; w < size; w++) {
@@ -56,7 +36,7 @@ int main() {
 		cout << endl;
 	}
 
-	delete[] *matrix;
+	delete[] * matrix;
 	system("pause");
 	return 0;
 }
