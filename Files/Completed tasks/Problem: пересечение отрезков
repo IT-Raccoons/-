@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+ long long InOut(int x, int y, int x0, int y0, int a, int b)
+{
+    if((a-x)*(y0-y)-(b-y)*(x0-x)>0)
+    {
+        return -1 ;
+    }
+    else if((a-x)*(y0-y)-(b-y)*(x0-x)<0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int main()
+{ 
+    int x1,y1,x2,y2,x3,y3,x4,y4;
+    cin>>x1>>y1>>x2>>y2>>x3>>y3>>x4>>y4;
+     long long ex=x2-x1, ey=y2-y1, fx=x4-x3, fy=y4-y3, c=ey*x1-ex*y1, c1=fy*x4-fx*y4, min, max, miny, maxy;
+    if(ex*fy!=fx*ey) 
+    {
+        if(InOut(x1,y1,x2,y2, x3,y3)!=InOut(x1,y1,x2,y2, x4,y4) &&InOut(x3,y3,x4,y4,x1,y1)!=InOut(x3,y3,x4,y4,x2,y2))
+        cout<<"Yes";
+        else
+        cout<<"No";
+    }   
+    else if( ey*fx==ex*fy && ex*c1==fx*c ) 
+	{
+		if(x1<x2) 
+		{min=x1;
+		max=x2;
+		}
+		else 
+		{max=x1;
+		min=x2;
+		}
+		if(y1<y2) 
+		{miny=x1;
+		maxy=x2;
+		}
+		else 
+		{maxy=y1;
+		miny=y2;
+		}
+		if(((x1==x3||x1==x4||x2==x3||x2==x4 )&& (y1==y3||y1==y4||y2==y3||y2==y4))||
+		((min<x3 && max>x3)||(min<x4 && max>x4) &&((miny<y3 && maxy>y3)||(miny<y4 && maxy>y4)))) cout<<"Yes";
+		else cout<<"No";
+	}
+    else cout<<"No";
+ 
+    return 0;
+}
