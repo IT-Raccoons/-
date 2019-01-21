@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+	string number1, number2;
+	int weightnumber1, weightnumber2, weight;
+	cin>>number1>>number2;
+	
+	weightnumber1=number1.size();
+	weightnumber2=number2.size();
+	
+	if(weightnumber1>weightnumber2) weight=weightnumber1+1;
+	else weight=weightnumber2+1;
+	int number3[weight+1], n=0;
+	for(int i=1; i<=weight; i++)
+	{
+		number3[weight-i]=0;
+		if(i<=weightnumber1 && i<=weightnumber2)	number3[weight-i]=((number1.at(weightnumber1-i)-'0')+(number2.at(weightnumber2-i)-'0'));
+		else if(i<=weightnumber1 && i>weightnumber2) number3[weight-i]=(number1.at(weightnumber1-i)-'0');
+		else if(i<=weightnumber2 && i>weightnumber1) number3[weight-i]=(number1.at(weightnumber2-i)-'0');
+		number3[weight-i]+=n;
+		if (number3[weight-i]>9)
+		{
+			n=1;
+			number3[weight-i]=number3[weight-i]%10;
+		}
+		else n=0;
+	
+	}
+	for(int i=0; i<weight; i++)
+	{
+		if(i==0) 
+		{
+		 	if(number3[i]!=0) cout<<number3[i];
+		}	
+		else
+			cout<<number3[i];
+	}
+	return 0;
+}
