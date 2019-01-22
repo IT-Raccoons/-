@@ -1,0 +1,74 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+	string number1, number2;
+	int weightnumber1, weightnumber2, weight, error=0;
+	cin>>number1>>number2;
+	
+	weightnumber1=number1.size();
+	weightnumber2=number2.size();
+	
+if(weightnumber1>weightnumber2) weight=weightnumber1;
+	else if (weightnumber1<weightnumber2)
+	{
+		weight=weightnumber2;
+		swap(number1,number2);
+		weightnumber1=number1.size();
+		weightnumber2=number2.size();
+		cout<<"-";
+	}	
+	else
+	{
+		
+		for(int i=0; i<weightnumber1; i++ )
+		{
+		    weight=weightnumber2;
+			if (number1.at(i)>number2.at(i)) break;
+			else if(number1.at(i)<number2.at(i)) 
+			{
+				
+				swap(number1,number2);
+				weightnumber1=number1.size();
+				weightnumber2=number2.size();
+				cout<<"-";
+				break;
+			}
+			else error++;
+		}
+	}
+	if(error==weightnumber1) cout<<"0";
+	else
+	{
+		weight-=error;
+		int number3[weight], n=0;
+		for(int i=1; i<=weight; i++)
+		{
+			number3[weight-i]=0;
+			if(i<=weightnumber1 && i<=weightnumber2)	number3[weight-i]=((number1.at(weightnumber1-i)-'0')-(number2.at(weightnumber2-i)-'0'));
+			else if(i<=weightnumber1 && i>weightnumber2) number3[weight-i]=(number1.at(weightnumber1-i)-'0');
+			else if(i<=weightnumber2 && i>weightnumber1) number3[weight-i]=(number2.at(weightnumber2-i)-'0');
+			number3[weight-i]+=n;
+			if (number3[weight-i]<0)
+			{
+				n=-1;
+				if(i<=weightnumber1 && i<=weightnumber2)	number3[weight-i]=(10+number3[weight-i]);
+				else if(i<=weightnumber1 && i>weightnumber2) number3[weight-i]=10+number3[weight-i];
+				else if(i<=weightnumber2 && i>weightnumber1) number3[weight-i]=10+number3[weight-i];
+				}
+			else n=0;
+		}
+		error=0;
+		for(int i=0; i<weight; i++)
+		{
+			if( number3[i]==0 )error++;
+			else break;
+		}
+		for(int i=0; i<weight; i++)
+		{
+			if(i>=error) cout<<number3[i];
+		}
+	}
+	return 0;
+}
