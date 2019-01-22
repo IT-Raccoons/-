@@ -50,3 +50,88 @@ int main() {
 	}
 	return 0;
 }
+//В целом другой алгоритм, не уверена, что его нельзя улучшить, так что остальное, если хотите , за вами.
+#include <iostream>
+#include <string>
+using namespace std;
+ 
+int main()
+{
+    string number1, number2, number3;
+    int weightnumber1, weightnumber2,  weightnumber3;
+    cin>>number1>>number2>>number3;
+     
+    weightnumber1=number1.size();
+    weightnumber2=number2.size();
+    weightnumber3=number3.size();
+ 
+    if (weightnumber1<weightnumber2)
+    {
+        swap(number1,number2);
+        weightnumber1=number1.size();
+        weightnumber2=number2.size();
+    }   
+    else if(weightnumber1==weightnumber2)
+    {
+         
+        for(int i=0; i<weightnumber1; i++ )
+        {
+            if (number1.at(i)>number2.at(i)) break;
+            else if(number1.at(i)<number2.at(i)) 
+            {
+                 
+                swap(number1,number2);
+                weightnumber1=number1.size();
+                weightnumber2=number2.size();
+                break;
+            }
+        }
+    }
+    if (weightnumber2<weightnumber3)
+    {
+        swap(number2,number3);
+        weightnumber2=number2.size();
+        weightnumber3=number3.size();
+    }   
+    else if(weightnumber2==weightnumber3)
+    {
+         
+        for(int i=0; i<weightnumber2; i++ )
+        {
+            if (number2.at(i)>number3.at(i)) break;
+            else if(number2.at(i)<number3.at(i)) 
+            {
+                 
+                swap(number2,number3);
+                weightnumber2=number2.size();
+                weightnumber3=number3.size();
+                break;
+            }
+        }
+    }
+    if (weightnumber1<weightnumber2)
+    {
+        swap(number1,number2);
+        weightnumber1=number1.size();
+        weightnumber2=number2.size();
+    }   
+    else if(weightnumber1==weightnumber2)
+    {
+         
+        for(int i=0; i<weightnumber1; i++ )
+        {
+            if (number1.at(i)>number2.at(i)) break;
+            else if(number1.at(i)<number2.at(i)) 
+            {
+                 
+                swap(number1,number2);
+                weightnumber1=number1.size();
+                weightnumber2=number2.size();
+                break;
+            }
+        }
+    }
+    cout <<number1;
+     
+    return 0;
+}
