@@ -1,0 +1,141 @@
+#include <iostream>
+#include <string>
+using namespace std;
+ 
+int main()
+{
+	string number1,number2, nextnumber;
+	int weightnumber1, weightnumber2, weight, error=0;
+	cin>>number1>>number2;
+	weightnumber1=number1.size();
+	weightnumber2=number2.size();
+	//Нахождение сдвигом Наибольшего number1;
+  {
+	  nextnumber=number1;
+	  for(int g=0; g<weightnumber1; g++)
+	  {
+		  string number; 
+		  number= nextnumber.at(weightnumber1-1);
+		  number+=nextnumber.substr(0, weightnumber1-1);
+ 
+ 		  for(int i=0; i<weightnumber1; i++ )
+	  		{
+  				if (number.at(i)>number1.at(i))
+				  {
+				  	number1=number;
+					  i=weightnumber1;
+				  }
+			  	else if (number1.at(i)>number.at(i)) i=weightnumber1;
+		  	}
+	  	nextnumber=number;
+  	}
+  }
+	//Нахождение Минимального number2
+  {
+	  nextnumber=number2;
+  	for(int g=0; g<weightnumber2; g++)
+  	{ 
+   // Ифка нужна чтоб проверить не ввели ли число по типу "001"
+	  if(number2.at(0)-'0'!=0)
+  	{
+	  	string number; 
+		  number= nextnumber.at(	weightnumber2-1);
+ 	  	number+=nextnumber.substr(0, 	weightnumber2-1);
+ 		  if(number.at(0)!='0')
+ 	  	{
+ 		  	for(int i=0; i<weightnumber2; i++ )
+			  {
+				  if (number.at(i)<number2.at(i))
+			 	  {
+				  	number2=number;
+					  i=weightnumber2;
+			  	}
+				  else if (number2.at(i)<number.at(i) ) i=weightnumber2;
+			  }
+		  }
+		  nextnumber=number;
+  	}
+	  else // элсом я сдвигаю number2 до минимальной цифры не являющейся нулём. По типу ввели "0012" фор пробежался нашёл минимал =1 и сдвинул получив "1200"
+		 {
+        int min=10, r;
+		    string number;
+	    	for(int i=0; i<weightnumber2; i++)
+		      {
+			      if(number2.at(i)-'0'<min && number2.at(i)-'0'!=0 )
+		  	    {
+			  	    min=number2.at(i)-'0';
+				      r=i;
+			       }
+		      }
+		    number=number2.substr(r, weightnumber2);
+ 		    number+=number2.substr(0,r);
+ 		    number2=number;
+	    }
+	  }
+  }
+//	cout<<number1<<endl<<number2<<endl;
+// Далее просто код для вычисления разности
+{
+if(weightnumber1>weightnumber2) weight=weightnumber1;
+	else if (weightnumber1<weightnumber2)
+	{
+		weight=weightnumber2;
+		swap(number1,number2);
+		weightnumber1=number1.size();
+		weightnumber2=number2.size();
+		cout<<"-";
+	}	
+	else
+	{
+		
+		for(int i=0; i<weightnumber1; i++ )
+		{
+		    weight=weightnumber2;
+			if (number1.at(i)>number2.at(i)) break;
+			else if(number1.at(i)<number2.at(i)) 
+			{
+				
+				swap(number1,number2);
+				weightnumber1=number1.size();
+				weightnumber2=number2.size();
+				cout<<"-";
+				break;
+			}
+			else error++;
+		}
+	}
+	if(error==weightnumber1) cout<<"0";
+	else
+	{
+		weight-=error;
+		int number3[weight], n=0;
+		for(int i=1; i<=weight; i++)
+		{
+			number3[weight-i]=0;
+			if(i<=weightnumber1 && i<=weightnumber2)	number3[weight-i]=((number1.at(weightnumber1-i)-'0')-(number2.at(weightnumber2-i)-'0'));
+			else if(i<=weightnumber1 && i>weightnumber2) number3[weight-i]=(number1.at(weightnumber1-i)-'0');
+			else if(i<=weightnumber2 && i>weightnumber1) number3[weight-i]=(number2.at(weightnumber2-i)-'0');
+			number3[weight-i]+=n;
+			if (number3[weight-i]<0)
+			{
+				n=-1;
+				if(i<=weightnumber1 && i<=weightnumber2)	number3[weight-i]=(10+number3[weight-i]);
+				else if(i<=weightnumber1 && i>weightnumber2) number3[weight-i]=10+number3[weight-i];
+				else if(i<=weightnumber2 && i>weightnumber1) number3[weight-i]=10+number3[weight-i];
+				}
+			else n=0;
+		}
+		error=0;
+		for(int i=0; i<weight; i++)
+		{
+			if( number3[i]==0 )error++;
+			else break;
+		}
+		for(int i=0; i<weight; i++)
+		{
+			if(i>=error) cout<<number3[i];
+		}
+	}
+}
+	return 0;
+}
