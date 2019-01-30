@@ -1,0 +1,39 @@
+// Методом тыка узнала что 2^999 имеет 301 знак поэтому взяла массив размером 302
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+	int count;
+	cin>>count;
+	int Number[302], error=0, n=0;
+	for(int i=0;i<302;i++)
+	{
+		Number[i]=0;
+	}
+	Number[301]=2;
+	for(int i=1; i<count; i++)
+	{
+		for(int b=301; b>=0; b--)
+		{
+			Number[b]=(Number[b]*2)+n;
+			if(Number[b]>9)
+			{
+				n=Number[b]/10;	
+				Number[b]%=10;
+			}
+				else n=0;
+		}
+	}
+		for(int i=0;i<302; i++)
+	{
+		if(Number[i]==0) error++;
+		else break;
+	}
+	for(int i=0; i<302; i++)
+	{
+	
+		if(i>=error) cout<<Number[i];
+	}
+	return 0;
+}
