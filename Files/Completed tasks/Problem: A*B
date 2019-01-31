@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+int main()
+{
+	string number1, number2;
+	int weightnumber1, weightnumber2, weight, error=0;
+	cin>>number1>>number2;
+	
+	weightnumber1=number1.size();
+	weightnumber2=number2.size();
+	weight=weightnumber1+weightnumber2+1;
+	
+	int Number3[weight],Number4[weight];
+	for(int i=0;i<=weight; i++)
+	{
+		Number3[i]=0;
+	}
+	int n=0, n1=0;
+	
+	for(int i=1,h=weightnumber2-1; i<=weight; i++, h--)
+	{
+		n=0;
+		for(int i=0;i<=weight; i++)
+			{
+				Number4[i]=0;
+			}
+		for(int b=weight-i,g=weightnumber1-1; b>=0; b--, g--)
+		{
+		Number4[b]+=n;
+			if(h>=0)
+			{
+				if(g>=0)
+				{
+					Number4[b]+=((number1.at(g)-'0')*(number2.at(h)-'0'));
+				}
+			}
+			n=Number4[b]/10;
+			Number4[b]%=10;
+		 
+		}
+	/*	for(int i=0;i<=weight; i++)
+			{
+				cout<<Number4[i];
+			}
+		cout<<endl;
+		*/
+		for (int r=1; r<=weight; r++)
+		{
+	  	Number3[weight-r]+=Number4[weight-r]+n1;
+	  	if (Number3[weight-r]>9)
+		{
+			n1=1;
+			Number3[weight-r]%=10;
+		}
+		else n1=0;
+	}
+}
+	for(int i=0;i<weight; i++)
+	{
+		if(Number3[i]==0) error++;
+		else break;
+	}
+	if(error==weight) cout<<"0";
+	else
+	{
+	for(int i=0; i<weight; i++)
+	{
+	
+		if(i>=error) cout<<Number3[i];
+	}
+}
+	return 0;
+}
