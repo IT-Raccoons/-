@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+long double length(int x1, int y1, int x2, int y2, int x3, int y3)
+{
+	long double h;
+	h = abs(((y1 - y2)*x3) - ((x1 - x2)*y3) - ((y1 - y2)*x1) + ((x1 - x2)*y1)) / sqrt(pow(y1 - y2, 2) + pow(x1 - x2, 2));
+	return h;
+}
+
+int main()
+{
+	int x1, y1, x2, y2, x3, y3, x4, y4;
+	long double min = 100001.0;
+	cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
+  	long double h[3];
+	h[0] = length(x1, y1, x2, y2, x4, y4);
+	h[1] = length(x1, y1, x3, y3, x4, y4);
+	h[2] = length(x3, y3, x2, y2, x4, y4);
+	for (int i = 0; i < 3; i++)
+	{
+		if (min > h[i])
+		{
+			min = h[i];
+		}
+	}
+	printf("%.9Lf", min);
+	return 0;
+}
