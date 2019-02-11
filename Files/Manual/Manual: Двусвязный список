@@ -1,0 +1,84 @@
+// В Insert найден баг, не использовать пока не исправлен
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+	int Value;
+	Node* Left;
+	Node* Right;
+	Node() {
+		Left = NULL;
+		Right = NULL;
+	}
+};
+
+class List {
+public:
+	Node* Head;
+	Node* Tail;
+	List() {
+		Head = NULL;
+		Tail = NULL;
+	}
+	void PushFront(int val) {
+		if (Head == NULL) {
+			Head = new Node();
+			Head -> Value = val;
+			Tail = Head;
+		}
+		else {
+			Node* tmp = new Node();
+			tmp -> Value = val;
+			tmp -> Right = Head;
+			Head -> Left = tmp;
+			Head = tmp;
+		}
+	}
+	void Insert(Node* Prev, int val) {
+		if (Prev == NULL)
+			PushFront(val);
+		Node* tmp = new Node();
+		tmp -> Value = val;
+		tmp -> Left = Prev;
+		tmp -> Right = Prev -> Right;
+		Prev -> Right = tmp;
+		if (tmp -> Right) {
+			tmp -> Right -> Left = tmp;
+		}
+		else {
+			Tail = tmp;
+		}
+	}
+	void Delete(Node* Elem) {
+		if (Elem -> Left) {
+			Elem -> Left -> Right = Elem -> Right;
+		}
+		else {
+			Head = Elem -> Right;
+		}
+		if (Elem -> Right) {
+			Elem -> Right -> Left = Elem -> Left;
+		}
+		else {
+			Tail = Elem -> Left;
+		}
+		delete Elem;
+	}
+	void PrintList() {
+		for (Node* it = Head; it != NULL; it = it -> Right) {
+			cout << it -> Value << " ";
+		}
+		cout << endl;
+	}
+};
+
+int main() {
+	List a;
+	// Äàëåå èäóò êîìàíäû âèäà "íàçâàíèå ëèñòà. ìåòîä"
+	//.PushFront(3);
+	//a.Delete(a.Head);
+	//a.PrintList();
+	a.Insert(a.Tail, 3);
+	return 0;
+}
