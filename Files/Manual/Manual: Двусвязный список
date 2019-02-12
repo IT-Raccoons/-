@@ -1,4 +1,4 @@
-// В Insert найден баг, не использовать пока не исправлен
+// Не использовать List a.Insert пока не будет исправлена критическая ошибка.
 #include <iostream>
 using namespace std;
 
@@ -75,10 +75,10 @@ public:
 
 int main() {
 	List a;
-	// Äàëåå èäóò êîìàíäû âèäà "íàçâàíèå ëèñòà. ìåòîä"
-	//.PushFront(3);
+	// Далее идут команды вида "название листа. метод"
+	//a.PushFront(3);
 	//a.Delete(a.Head);
 	//a.PrintList();
-	a.Insert(a.Tail, 3);
+	//a.Insert(a.Tail, 3);
 	return 0;
 }
