@@ -1,4 +1,3 @@
-// Не использовать List a.Insert пока не будет исправлена критическая ошибка.
 #include <iostream>
 using namespace std;
 
@@ -38,16 +37,18 @@ public:
 	void Insert(Node* Prev, int val) {
 		if (Prev == NULL)
 			PushFront(val);
-		Node* tmp = new Node();
-		tmp -> Value = val;
-		tmp -> Left = Prev;
-		tmp -> Right = Prev -> Right;
-		Prev -> Right = tmp;
-		if (tmp -> Right) {
-			tmp -> Right -> Left = tmp;
-		}
 		else {
-			Tail = tmp;
+			Node* tmp = new Node();
+			tmp -> Value = val;
+			tmp -> Left = Prev;
+			tmp -> Right = Prev -> Right;
+			Prev -> Right = tmp;
+			if (tmp -> Right) {
+				tmp -> Right -> Left = tmp;
+			}
+			else {
+				Tail = tmp;
+			}
 		}
 	}
 	void Delete(Node* Elem) {
