@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+	int Value;
+	Node* Left;
+	Node* Right;
+	Node() {
+		Left = NULL;
+		Right = NULL;
+	}
+};
+
+struct List {
+	Node* Head;
+	Node* Tail;
+	List() {
+		Head = NULL;
+		Tail = NULL;
+	}
+	void PushFront(int val) {
+		if (Head == NULL) {
+			Head = new Node();
+			Head -> Value = val;
+			Tail = Head;
+		}
+		else {
+			Node* tmp = new Node();
+			tmp -> Value = val;
+			tmp -> Right = Head;
+			Head -> Left = tmp;
+			Head = tmp;
+		}
+	}
+	void Insert(Node* Prev, int val) {
+		Node* tmp = new Node();
+		tmp -> Value = val;
+		tmp -> Left = Prev;
+		if (Prev) {
+			tmp -> Right = Prev -> Right;
+			Prev -> Right = tmp;
+			if (tmp -> Right) {
+			tmp -> Right -> Left = tmp;
+			}
+			else {
+				Tail = tmp;
+			}
+		}
+	}
+	void Delete(Node* Elem) {
+		if (Elem -> Left) {
+			Elem -> Left -> Right = Elem -> Right;
+		}
+		else {
+			Head = Elem -> Right;
+		}
+		if (Elem -> Right) {
+			Elem -> Right -> Left = Elem -> Left;
+		}
+		else {
+			Tail = Elem -> Left;
+		}
+		delete Elem;
+	}
+	void PrintList() {
+		for (Node* it = Head; it != NULL; it = it -> Right) {
+			cout << it -> Value << " ";
+		}
+		cout << endl;
+	}
+};
+
+int main() {
+	int q, n;
+	cin >> q;
+	List a;
+	for (int i = 0; i < q; i++) {
+		cin >> n;
+		if (n % 2)
+			a.Insert(a.Tail, n*2);
+	}
+	a.PrintList();
+	return 0;
+}
