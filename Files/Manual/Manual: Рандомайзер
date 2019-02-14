@@ -1,5 +1,6 @@
+#include <cstdlib>
 #include <time.h>
-srand(time(NULL);
+srand(time(NULL));
 rand()%(r-l)+l;
 r - правая граница последовательности
 l - левая граница последовательности
