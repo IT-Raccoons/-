@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+int main ()
+{
+  int i=1;
+  double X, Y;
+  cin >> X >> Y;
+  while (Y-X >= 0.00001)
+  {
+    X *= 1.15;
+    i++;
+  }
+  cout << i << endl;
+  return 0;
+}
