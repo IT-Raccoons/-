@@ -1,0 +1,100 @@
+// превышает на 0,186
+
+
+#include <iostream>
+
+using namespace std;
+struct Node {
+	long long Value;
+	Node* Left;
+	Node* Right;
+	Node() {
+		Left = NULL;
+		Right = NULL;
+	}
+};
+
+struct List {
+	Node* Head;
+	Node* Tail;
+	List() {
+		Head = NULL;
+		Tail = NULL;
+	}
+	void PushFront(long long val) {
+		if (Head == NULL) {
+			Head = new Node();
+			Head -> Value = val;
+			Tail = Head;
+		}
+		else {
+			Node* tmp = new Node();
+			tmp -> Value = val;
+			tmp -> Right = Head;
+			Head -> Left = tmp;
+			Head = tmp;
+		}
+	}
+	void Insert(Node* Prev, long long val) {
+		if (Prev == NULL)
+			PushFront(val);
+		else {
+			Node* tmp = new Node();
+			tmp -> Value = val;
+			tmp -> Left = Prev;
+			tmp -> Right = Prev -> Right;
+			Prev -> Right = tmp;
+			if (tmp -> Right) {
+				tmp -> Right -> Left = tmp;
+			}
+			else {
+				Tail = tmp;
+			}
+		}
+	}
+	void Delete(Node* Elem) {
+		if (Elem -> Left) {
+			Elem -> Left -> Right = Elem -> Right;
+		}
+		else {
+			Head = Elem -> Right;
+		}
+		if (Elem -> Right) {
+			Elem -> Right -> Left = Elem -> Left;
+		}
+		else {
+			Tail = Elem -> Left;
+		}
+		delete Elem;
+	}
+	void PrintList() {
+		for (Node* it = Head; it != NULL; it = it -> Right) {
+			cout << it -> Value << " ";
+		}
+		cout << endl;
+	}
+};
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	List a;
+	long long n, count, l, r;
+	cin>>n;
+	int Mass[n];
+	for(int i=0;i<n; i++)
+	{
+		cin>>Mass[i];
+	}
+	cin>>n;
+	for(int i=0; i<n; i++)
+	{
+		cin>> l>>r;
+		count=0;
+		for(int j=l-1; j<r; j++ )
+			count+=Mass[j];
+		a.Insert(a.Tail, count);
+	}
+	a.PrintList();
+	return 0;
+}
