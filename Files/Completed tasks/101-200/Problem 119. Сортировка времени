@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+class time {
+public:
+	int h, m, s, sum;
+};
+
+int main()
+{
+	int n;
+	cin >> n;
+	time q[n];
+	for (int i = 0; i < n; i++)
+	{
+		cin >> q[i].h >> q[i].m >> q[i].s;
+		q[i].sum = q[i].h * 60 * 60 + q[i].m * 60 + q[i].s;	
+	}
+	for (int i = 0; i < n; i++)
+		for (int w = 0; w < n; w++)
+			if (q[i].sum < q[w].sum)
+                swap(q[i], q[w]);
+    for (int i = 0; i < n; i++)
+    	cout << q[i].h << " " << q[i].m << " " << q[i].s << endl;
+    return 0;
+}
