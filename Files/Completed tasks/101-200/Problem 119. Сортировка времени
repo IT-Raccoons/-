@@ -1,8 +1,8 @@
 #include <iostream>
 using namespace std;
 
-class time {
-public:
+struct time
+{
 	int h, m, s, sum;
 };
 
