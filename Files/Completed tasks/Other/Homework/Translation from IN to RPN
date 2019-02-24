@@ -60,3 +60,64 @@ int main()
 }
 
 Вариант от Алексея:
+#include <iostream>
+#include <stack>
+#include <string.h>
+using namespace std;
+main(){
+	stack<char>oper;
+	string inp,str="";
+	getline (cin,inp);
+	for(int i=0;i<inp.size();i++){
+		if(inp[i]>='0' && inp[i]<='9')
+			str+=inp[i];
+		else if(!oper.empty()){
+			if(inp[i]=='^'){
+				oper.push(inp[i]);
+				str+=" ";
+			}
+			if(inp[i]=='/' || inp[i]=='*'){
+				if (oper.top()=='/' || oper.top()=='*' || oper.top()=='^'){
+					str=str+" "+oper.top();
+					oper.pop();
+					oper.push(inp[i]);
+				}
+				else{
+					oper.push(inp[i]);
+				}
+				str+=" ";
+			}
+			else if(inp[i]=='-' || inp[i]=='+'){
+				if (oper.top()=='-' || oper.top()=='+' || oper.top()=='/' || oper.top()=='*' || oper.top()=='^'){
+					str=str+" "+oper.top();
+					oper.pop();
+					oper.push(inp[i]);
+				}
+				else{
+					oper.push(inp[i]);
+				}
+				str+=" ";
+			}
+			else if(inp[i]=='('){
+				oper.push(inp[i]);
+			}
+			else if(inp[i]==')'){
+				do{
+					str=str+" "+oper.top();
+					oper.pop();
+				}while(oper.top()!='(');
+				oper.pop();
+				//str+=" ";
+			}
+		}
+		else{
+			oper.push(inp[i]);
+		}
+	}
+	while(!oper.empty()){
+		str=str+" "+oper.top();
+		oper.pop();
+	}
+	cout<<str;
+	return 0;
+}
