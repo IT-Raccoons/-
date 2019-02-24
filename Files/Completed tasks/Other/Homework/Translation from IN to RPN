@@ -1,0 +1,62 @@
+Вариант от Андрея:
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main()
+{	
+	string char_prior = "()+-*/^";
+	int int_prior[7] = {0, 0, 1, 1, 2, 2, 3};
+	stack<char> chars;
+	string input = "", output = "";
+	getline(cin, input);
+	
+	for (int i = 0; i < input.size(); i++)
+	{
+		if (input[i] >= '0' && input[i] <= '9')
+		{
+			output += input[i];
+			output += " ";
+		}
+		else if (input[i] == '+'
+			|| input[i] == '-'
+			|| input[i] == '*'
+			|| input[i] == '/'
+			|| input[i] == '^')
+		{
+			if (chars.size() == 0)
+				chars.push(input[i]);
+			else if (int_prior[char_prior.find(input[i])] <= int_prior[char_prior.find(chars.top())])
+			{
+				output += chars.top();
+				output += " ";
+				chars.pop();
+				chars.push(input[i]);
+			}
+			else
+				chars.push(input[i]);
+		}
+		else if (input[i] == '(')
+			chars.push(input[i]);
+		else if (input[i] == ')')
+		{
+			while (chars.top() != '(')
+			{
+				output += chars.top();
+				output += " ";
+				chars.pop();
+			}
+			chars.pop();
+		}
+	}
+	while (chars.size() != 0)
+	{
+		output += chars.top();
+		output += " ";
+		chars.pop();
+	}
+	cout << output;
+	return 0;
+}
+
+Вариант от Алексея:
