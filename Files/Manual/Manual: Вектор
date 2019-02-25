@@ -26,6 +26,13 @@ int main()
   {
     cout << *it << " ";
   }
+
+  for (auto &elem: a)
+  {
+    elem = 3;
+    cout << elem << " ";
+  }
+  
   return 0;
 }
 
