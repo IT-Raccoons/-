@@ -16,8 +16,12 @@ int main()
 	{
 		if (input[i] >= '0' && input[i] <= '9')
 		{
-			output += input[i];
-			output += " ";
+			if (input[i + 1] >= '0' && input[i + 1] <= '9')
+				output += input[i];
+			else {
+				output += input[i];
+				output += " ";
+			}
 		}
 		else if (input[i] == '+'
 			|| input[i] == '-'
