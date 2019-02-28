@@ -66,66 +66,78 @@ int main()
 
 Вариант от Алексея:
 #include <iostream>
-#include <stack>
 #include <string.h>
+#include <stack>
+#include <map>
 using namespace std;
-main(){
-	stack<char>oper;
-	string inp,str="";
-	getline (cin,inp);
-	for(int i=0;i<inp.size();i++){
-		if(inp[i]>='0' && inp[i]<='9')
-			str+=inp[i];
-		else if(!oper.empty()){
-			if(inp[i]=='^'){
-				oper.push(inp[i]);
-				str+=" ";
-			}
-			if(inp[i]=='/' || inp[i]=='*'){
-				if (oper.top()=='/' || oper.top()=='*' || oper.top()=='^'){
-					str=str+" "+oper.top();
-					oper.pop();
-					oper.push(inp[i]);
+
+int main()
+{	
+	/*///C++ 11
+	map <char, int> p_operation =  {{'(', 0},
+                             		{')', 0},
+                            		{'+', 1},
+					{'-', 1},
+					{'*', 2},
+					{'/', 2},
+					{'^', 3}};
+	////C++ 11*/
+
+	map <char, int> p_operation;
+	p_operation['(']=0;
+	p_operation[')']=0;
+	p_operation['+']=1;
+	p_operation['-']=1;
+	p_operation['*']=2;
+	p_operation['/']=2;
+	p_operation['^']=3;
+	
+	stack<char> operation;
+	string input="",output="";
+	getline(cin, input);
+	
+	for (int i=0;i<input.size();i++)
+	{
+		//Запись чисел
+		if(input[i]>='0' && input[i]<='9'){
+			output+=input[i];	
+		}
+		//Занесение знаков в стек
+		else if (input[i]=='+' || input[i]=='-' || input[i]=='*' || input[i]=='/' || input[i]=='^')	{
+				output+=" ";
+				if (operation.size()==0){
+					operation.push(input[i]);
 				}
-				else{
-					oper.push(inp[i]);
+				else if (p_operation[operation.top()]>=p_operation[input[i]]) {
+					output=output+operation.top()+" ";
+					operation.pop();
+					operation.push(input[i]);
 				}
-				str+=" ";
-			}
-			else if(inp[i]=='-' || inp[i]=='+'){
-				if (oper.top()=='-' || oper.top()=='+' || oper.top()=='/' || oper.top()=='*' || oper.top()=='^'){
-					str=str+" "+oper.top();
-					oper.pop();
-					oper.push(inp[i]);
-				}
-				else{
-					oper.push(inp[i]);
-				}
-				str+=" ";
-			}
-			else if(inp[i]=='('){
-				oper.push(inp[i]);
-			}
-			else if(inp[i]==')'){
-				do{
-					str=str+" "+oper.top();
-					oper.pop();
-				}while(oper.top()!='(');
-				oper.pop();
-				//str+=" ";
+			else{
+				operation.push(input[i]);
 			}
 		}
-		else{
-			oper.push(inp[i]);
+		//Обработка скобок
+		else if (input[i]=='('){
+			operation.push(input[i]);
+		}
+		else if (input[i]==')'){
+			output+=" ";
+			while (operation.top()!='('){
+				output=output+operation.top()+" ";
+				operation.pop();
+			}
+			operation.pop();
 		}
 	}
-	while(!oper.empty()){
-		str=str+" "+oper.top();
-		oper.pop();
+	while (operation.size()!=0){ 
+		output=output+operation.top()+" ";
+		operation.pop();
 	}
-	cout<<str;
+	cout << output;
 	return 0;
 }
+
 Вариант с преобработкой:
 #include<vector>
 #include<iostream>
