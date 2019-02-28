@@ -95,11 +95,11 @@ int main()
 	
 	for (int i=0;i<input.size();i++)
 	{
-		//Çàïèñü ÷èñåë
+		//Запись чисел
 		if(input[i]>='0' && input[i]<='9'){
 			output+=input[i];	
 		}
-		//Çàíåñåíèå çíàêîâ â ñòåê
+		//Занесение знаков в стек
 		else if (input[i]=='+' || input[i]=='-' || input[i]=='*' || input[i]=='/' || input[i]=='^')	{
 				output+=" ";
 				if (operation.size()==0){
@@ -114,7 +114,7 @@ int main()
 				operation.push(input[i]);
 			}
 		}
-		//Îáðàáîòêà ñêîáîê
+		//Обработка массивов
 		else if (input[i]=='('){
 			operation.push(input[i]);
 		}
