@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+	int Value;
+	Node* Next = NULL;
+	Node* Prev = NULL;	
+};
+
+class Queue {
+	Node* Back = NULL;
+	Node* Front = NULL;
+public:
+	bool IsEmpty()
+	{
+		if (Back == NULL)
+			return true;
+		else
+			return false;
+	}
+	void Push(int val) 
+	{
+		if (Back == NULL)
+		{
+			Back = Front = new Node();
+			Back -> Value = val;
+		}
+		else
+		{
+			Node* tmp = new Node();
+			tmp -> Value = val;
+			tmp -> Prev = Back;
+			Back -> Next = tmp;
+			Back = tmp;
+		}
+	}
+	int Pop()
+	{
+		int ret = Front -> Value;
+		if (Front -> Next == NULL)
+		{
+			delete Front;
+			Front = NULL;
+			Back = NULL;
+		}
+		else
+		{
+			Front = Front -> Next;
+			delete Front -> Prev;
+			Front -> Prev = NULL;
+		}
+		return ret;
+	}
+	int Top() // Âîçâðàò ïåðâîãî ýë-òà
+	{
+		return Front -> Value;
+	}
+};
+
+int main()
+{
+	Queue q;
+	q.Push(3);
+	q.Push(9);
+	while (!q.IsEmpty())
+		cout << q.Pop() << endl;
+	return 0;
+}
