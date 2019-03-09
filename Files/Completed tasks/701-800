@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n, m, count_errors = 0;
+	cin >> n >> m;
+	char input_char, matrix[n][m];
+	
+	// Ввод первой матрицы
+	for (int i = 0; i < n; i++)
+	{
+		for (int q = 0; q < m; q++)
+		{
+			cin >> input_char;
+			input_char == 'W' ? matrix[i][q] = 'B' : matrix[i][q] = 'W';
+		}
+	}
+	
+	// Ввод проверочной матрицы
+	for (int i = 0; i < n; i++)
+	{
+		for (int q = 0; q < m; q++)
+		{
+			cin >> input_char;
+			input_char != matrix[i][q] ? count_errors++ : false;
+		}
+	}
+	
+	cout << count_errors;
+	return 0;
+}
