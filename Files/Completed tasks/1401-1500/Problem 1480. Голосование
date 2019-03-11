@@ -1,0 +1,36 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <string>
+#include <map>
+
+using namespace std;
+
+
+int main() {
+	int n, max = 0;
+	string name;
+	map<string, int> histogramm;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> name;
+		if (histogramm.count(name) == 0)
+			histogramm[name] = 1;
+		else
+			histogramm[name]++;
+	}
+	for (auto i : histogramm)
+		if (max < i.second) max = i.second;
+	for (int q = max; q > 0; q--)
+	{
+		for (auto w : histogramm)
+		{
+			if (w.second - q >= 0)
+				cout << "X";
+			else
+				cout << ".";
+		}
+		cout << endl;
+	}
+	system("pause");
+}
