@@ -52,3 +52,76 @@ int main()
 }
 
 Через BFS:
+#include <iostream>
+#include <queue>
+#include <vector>
+#include <fstream>
+using namespace std;
+
+vector<vector<int> > g ;
+int n,m;
+
+void bfs(int start_x,int start_y,int color,int *k)
+{
+	if(g[start_x][start_y] != color){
+		queue <pair<int,int> > q;
+		int c = g[start_x][start_y];
+		g[start_x][start_y] = color;
+		*k+=1;
+		q.push({start_x,start_y});
+		while(!q.empty())
+		{
+			int x = q.front().first, y = q.front().second;
+			q.pop();
+			if(x-1>=0 && g[x-1][y] == c){
+				g[x-1][y] = color;
+				q.push({x-1,y});
+				*k+=1;
+			}
+			if(y-1>=0 && g[x][y-1] == c){
+				g[x][y-1] = color;
+				q.push({x,y-1});
+				*k+=1;
+			}
+		 	if(x+1<n && g[x+1][y] == c){
+				g[x+1][y] = color;
+				q.push({x+1,y});
+				*k+=1;
+			}
+			if(y+1<m && g[x][y+1] == c){
+				g[x][y+1] = color;
+				q.push({x,y+1});
+				*k+=1;
+			}
+		}
+	}
+}
+ 
+int main()
+{
+	ifstream in("input.txt");
+ 	ofstream out("output.txt");
+	int a,x,y,color,k=0;
+	in>>n>>m>>y>>x>>color;
+	g.resize(n);
+	for(int i=0; i<n; i++)
+	{
+		for(int j=0; j<m; j++)
+		{
+			in>>a;
+			g[i].push_back(a);
+		}		
+	}
+	bfs(x,y,color,&k);
+	out<<k<<endl;
+	for(int i=0; i<n; i++)
+	{
+		for(int j=0; j<m; j++)
+		{
+			out<<g[i][j]<<" ";
+		}
+		out<<endl;		
+	}
+	in.close(); 
+	out.close(); 
+}
