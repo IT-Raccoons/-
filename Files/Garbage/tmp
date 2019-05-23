@@ -1,15 +1,17 @@
 Дана прямоугольная матрица целых чисел размера rol на col найти количество и индексы тех столбцов (col) в которых чередуются четные и нечетные числа.
 
-#define _CRT_NO_WARNINGS_
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <vector>
 using namespace std;
 
 int main()
 {
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
 	int row, col, count_true_cols = 0;
 	cin >> row >> col;
-	if (col)
+	if (col == 1)
 	{
 		cout << 0;
 		return 0;
@@ -44,6 +46,5 @@ int main()
 	{
 		cout << output[i] << " ";
 	}
-	system("pause");
 	return 0;
 }
