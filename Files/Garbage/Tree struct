@@ -1,0 +1,36 @@
+#include <iostream>
+
+class Node
+{
+public:
+	int Value;
+	Node* Left = nullptr;
+;
+	Node* Right = nullptr;
+	Node* Parent = nullptr;
+};
+
+class Tree
+{
+public:
+	Node* Root = nullptr;
+	void Add(int Elem)
+	{
+		
+	}
+
+	void IsExist(int Elem)
+	{
+
+	}
+
+	void Delete(int Elem)
+	{
+
+	}
+};
+
+int main()
+{
+
+}
