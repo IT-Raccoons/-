@@ -1,35 +1,129 @@
 #include <iostream>
+using namespace std;
 
 class Node
 {
 public:
 	int Value;
-	Node* Left = nullptr;
-	Node* Right = nullptr;
-	Node* Parent = nullptr;
+	Node* Left = NULL;
+	Node* Right = NULL;
+	Node* Parent = NULL;
 };
 
 class Tree
 {
 public:
-	Node* Root = nullptr;
-	void Add(int Elem)
+	Node* Root = NULL;
+	void Add(int elem)
 	{
+		if (Root == NULL)
+		{
+			Root = new Node();
+			Root->Value = elem;
+		}
+		else
+		{
+			Node* tmp = Root;
+			while (tmp != NULL)
+			{
+				if (tmp->Value >= elem)
+				{
+					if (tmp -> Left == NULL)
+					{
+						tmp->Left = new Node();
+						tmp->Left->Value = elem;
+						tmp->Left->Parent = tmp;
+						break;
+					}
+					tmp = tmp->Left;
+				}
+				else
+				{
+					if (tmp->Right == NULL)
+					{
+						tmp->Right = new Node();
+						tmp->Right->Value = elem;
+						tmp->Right->Parent = tmp;
+						break;
+					}
+					tmp = tmp->Right;
+				}
+			}
+		}
+	}
+
+	bool IsExist(int elem)
+	{
+		Node* tmp = Root;
 		
+		while (tmp != NULL && tmp -> Value != elem)
+			if (tmp -> Value > elem)
+				tmp = tmp->Left;
+			else
+				tmp = tmp->Right;
+		return tmp != NULL;
 	}
 
-	void IsExist(int Elem)
+	void Delete(int elem)
 	{
+		Node* tmp = Root;
+		while (tmp != NULL && tmp->Value != elem)
+			if (tmp->Value > elem)
+				tmp = tmp->Left;
+			else
+				tmp = tmp->Right;
+		if (tmp)
+		{
+			Node *Parent = tmp->Parent,
+				*r = tmp->Right,
+				*l = tmp -> Left;
+			if (r != NULL)
+			{
+				if (Parent->Left == tmp)
+					Parent->Left = r;
+				else
+					Parent->Right = r;
+				r->Parent = Parent;
+				while (r->Left != NULL)
+					r = r->Left;
+				r->Left = l;
+				l->Parent = r;
 
-	}
-
-	void Delete(int Elem)
-	{
-
+			}
+			else if (l != NULL)
+			{
+				if (Parent->Left == tmp)
+				{
+					Parent->Left = l;
+				}
+				else
+				{
+					Parent->Right = l;
+				}
+				l->Parent = Parent;
+			}
+			else
+			{
+				if (Parent->Left == tmp)
+					Parent->Left = NULL;
+				else
+					Parent->Right = NULL;
+			}
+			delete tmp;
+		}
 	}
 };
 
 int main()
 {
-
+	Tree test;
+	test.Add(5);
+	test.Add(6);
+	test.Add(8);
+	test.Add(1);
+	test.Add(4);
+	cout << test.IsExist(8);
+	test.Delete(8);
+	cout << test.IsExist(8);
+	system("pause");
 }
